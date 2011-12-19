@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/status_icon"
+        android:layout_width="64px"
+        android:layout_height="64px"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitCenter" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="64px"
+        android:layout_marginLeft="10px"
+        android:layout_toRightOf="@id/status_icon" >
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="fill_parent"
+            android:layout_height="32px"
+            android:layout_alignParentTop="true" />
+
+        <ProgressBar
+            android:id="@+id/status_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="32px"
+            android:layout_below="@id/status_text"
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@android:drawable/progress_horizontal" />
+    </RelativeLayout>
+
+</RelativeLayout>
