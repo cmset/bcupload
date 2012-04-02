@@ -29,7 +29,8 @@
             android:label="@string/app_name"
             android:name="fr.gso.bcupload.VideoPickerActivity"
             android:theme="@style/GSOITheme" />
-
+<activity
+    android:name=".BCUploadPreferencesActivity" />
         <service android:label="@string/app_name"  android:name="fr.gso.bcupload.UploadService" >
         </service>
     </application>

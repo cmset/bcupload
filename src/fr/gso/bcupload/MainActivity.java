@@ -4,6 +4,9 @@ import fr.gso.bcupload.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,6 +35,21 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return true;
+     }
+	
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+           case R.id.settings_option_item:
+        	   Intent intent = new Intent(this,BCUploadPreferencesActivity.class);
+        	   startActivity(intent);
+              return true;
+        }
+        return false;}
+    
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {

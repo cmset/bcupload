@@ -18,6 +18,7 @@ public class UploadActivity extends Activity implements OnClickListener {
 	private EditText edtTitle;
 	private EditText edtDescription;
 	private EditText edtAuthor;
+	private EditText edtTags;
 	private String videoFilePath;
 
 	@Override
@@ -29,6 +30,9 @@ public class UploadActivity extends Activity implements OnClickListener {
 		edtTitle = (EditText) findViewById(R.id.edt_Title);
 		edtDescription = (EditText) findViewById(R.id.edt_Description);
 		edtAuthor = (EditText) findViewById(R.id.edt_Author);
+		edtTags = (EditText) findViewById(R.id.edt_Tags);
+		edtTags.setText(BCUploadPrefs.getTags(this));
+		edtAuthor.setText(BCUploadPrefs.getCredit(this));
 		if (getIntent().hasExtra(EXTRA_VIDEO_FILE_PATH)) {
 			videoFilePath = getIntent().getStringExtra(EXTRA_VIDEO_FILE_PATH);
 		}
@@ -39,23 +43,27 @@ public class UploadActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btn_Upload:
 			if (ValidInputs()) {
-				
+
 				BCVideo video = new BCVideo();
 				video.setTitle(edtTitle.getText().toString().trim());
 				video.setShortDescription(edtDescription.getText().toString().trim());
 				video.setPreparer("mobile_reporter");
 				video.setCredit(edtAuthor.getText().toString().trim());
-				video.setTags(new String[] { "depot_mobile_reporter" });
+				video.setTags(edtTags.getText().toString().trim().split(";"));
 				video.setFilepath(videoFilePath);
-				video.setWriteToken(getString(R.string.write_token));
+				video.setWriteToken(BCUploadPrefs.getLibraryToken(this));
 				video.setUploadUrl(getString(R.string.upload_url));
-					
-				Intent intent = new Intent(this,UploadService.class); 
-				intent.putExtra(UploadService.VIDEO, video); 
+
+				// Record inputs in preferences
+				BCUploadPrefs.setCredit(this, edtAuthor.getText().toString().trim());
+				BCUploadPrefs.setTags(this, edtTags.getText().toString().trim());
+
+				Intent intent = new Intent(this, UploadService.class);
+				intent.putExtra(UploadService.VIDEO, video);
 				startService(intent);
 				setResult(RESULT_OK);
 				finish();
-		}
+			}
 			break;
 		}
 
@@ -63,6 +71,7 @@ public class UploadActivity extends Activity implements OnClickListener {
 
 	/**
 	 * Validation des entrées utilisateurs
+	 * 
 	 * @return Status de validation
 	 */
 	protected boolean ValidInputs() {

@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GSOI Uploader</string>
-    <string name="lbl_title">Titre de la vidéo</string>
+    <string name="app_name">Brightcove Uploader</string>
+    <string name="lbl_title">Titre</string>
     <string name="lbl_description">Description</string>
-    <string name="lbl_author">Adresse email</string>
+    <string name="lbl_author">Crédit</string>
+    <string name="lbl_tags">Tags</string>
     <string name="lbl_upload">Envoyer la vidéo</string>
     <string name="lbl_browse">Parcourir et Envoyer</string>
     <string name="upload_url">http://api.brightcove.com/services/post</string>
     <string name="upload">Téléchargement</string>
-    <string name="write_token">xxxxx</string>
     <string name="upload_end">Téléchargement terminé</string>
     <string name="mandatory_fields">Veuillez remplir tous les champs</string>
-</resources>
+    <string name="undefined">indéfini</string>
+    <string name="settings">Configuration</string>
+    <string name="pref_library">Bibliothèque</string>
+    <string name="pref_library_token">Token de sécurité</string>
+    <string name="pref_library_token_help">Token d\'écriture</string>
+    <string name="pref_library_token_key">wToken</string>
+    <string name="pref_tags">Tags</string>
+    <string name="pref_tags_help">Tags par défaut</string>
+    <string name="pref_tags_key">tags</string>
+    <string name="pref_credit">Crédit</string>
+    <string name="pref_credit_help">Crédit par défaut</string>
+    <string name="pref_credit_key">credit</string>
+
+</resources>

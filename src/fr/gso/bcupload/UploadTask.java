@@ -52,8 +52,8 @@ public class UploadTask extends AsyncTask<Integer, Integer, String> {
 				}
 			});
 
-			Log.v("JSON", _Video.ToJson());
-			multipartContent.addPart("JSON-RPC", new StringBody(_Video.ToJson(), Charset.forName("UTF-8")));
+			Log.v("JSON", _Video.toJson());
+			multipartContent.addPart("JSON-RPC", new StringBody(_Video.toJson(), Charset.forName("UTF-8")));
 			multipartContent.addPart("file", new FileBody(new File(_Video.getFilepath())));
 			_TotalSize = multipartContent.getContentLength();
 			httpPost.setEntity(multipartContent);

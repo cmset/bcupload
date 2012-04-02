@@ -6,7 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BCVideo implements Serializable {
+/**
+ * This class is a container for a video.
+ * 
+ * @author c.mousset
+ * 
+ */
+public final class BCVideo implements Serializable {
 	private static final long serialVersionUID = 605328778506513618L;
 	private String title;
 	private String shortDescription;
@@ -17,63 +23,134 @@ public class BCVideo implements Serializable {
 	private String[] tags;
 	private String uploadUrl;
 
+	/**
+	 * @return String The Upload URL
+	 */
 	public String getUploadUrl() {
 		return uploadUrl;
 	}
 
-	public void setUploadUrl(String uploadUrl) {
-		this.uploadUrl = uploadUrl;
+	/**
+	 * @param value
+	 *            String The Upload URL
+	 */
+	public void setUploadUrl(final String value) {
+		this.uploadUrl = value;
 	}
 
+	/**
+	 * @return String The Video Title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	/**
+	 * @param value
+	 *            String The Video Title
+	 */
+	public void setTitle(final String value) {
+		this.title = value;
 	}
 
+	/**
+	 * @return String The video description
+	 */
 	public String getShortDescription() {
 		return shortDescription;
 	}
 
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
+	/**
+	 * @param value
+	 *            String The video description
+	 */
+	public void setShortDescription(final String value) {
+		this.shortDescription = value;
 	}
 
+	/**
+	 * @return String The video file path
+	 */
 	public String getFilepath() {
 		return filepath;
 	}
 
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	/**
+	 * @param value
+	 *            String The video file path
+	 */
+	public void setFilepath(final String value) {
+		this.filepath = value;
 	}
 
+	/**
+	 * @return String The Video Preparer (Custom field)
+	 */
 	public String getPreparer() {
 		return preparer;
 	}
 
-	public void setPreparer(String preparer) {
-		this.preparer = preparer;
+	/**
+	 * @param value
+	 *            String The Video Preparer (Custom field)
+	 */
+	public void setPreparer(final String value) {
+		this.preparer = value;
 	}
 
+	/**
+	 * @return String The Video Credit (Custom field)
+	 */
 	public String getCredit() {
 		return credit;
 	}
 
-	public void setCredit(String credit) {
-		this.credit = credit;
+	/**
+	 * @param value
+	 *            String The Video Credit (Custom field)
+	 */
+	public void setCredit(final String value) {
+		this.credit = value;
 	}
 
+	/**
+	 * @return String[] The video tags
+	 */
 	public String[] getTags() {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
-		this.tags = tags;
+	/**
+	 * @param value
+	 *            String[] The video tags
+	 */
+	public void setTags(final String[] value) {
+		this.tags = value;
 	}
 
-	public String ToJson() throws JSONException {
+	/**
+	 * @return String The write token
+	 */
+	public String getWriteToken() {
+		return writeToken;
+	}
+
+	/**
+	 * @param value
+	 *            String The Write Token
+	 */
+	public void setWriteToken(final String value) {
+		this.writeToken = value;
+	}
+
+	/**
+	 * Serialize the video into JSON string.
+	 * 
+	 * @return String The video serialized as JSON
+	 * @throws JSONException
+	 *             Serialization Error
+	 */
+	public String toJson() throws JSONException {
 		JSONArray videoTags = new JSONArray();
 
 		for (int i = 0; i < tags.length; i++) {
@@ -101,13 +178,5 @@ public class BCVideo implements Serializable {
 		request.put("params", params);
 
 		return request.toString();
-	}
-
-	public String getWriteToken() {
-		return writeToken;
-	}
-
-	public void setWriteToken(String writeToken) {
-		this.writeToken = writeToken;
 	}
 }
