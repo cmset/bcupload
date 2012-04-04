@@ -1,8 +1,13 @@
 package fr.gso.bcupload;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -11,8 +16,6 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -51,16 +54,36 @@ public class UploadTask extends AsyncTask<Integer, Integer, String> {
 					publishProgress((int) ((num / (float) _TotalSize) * 100));
 				}
 			});
-
 			Log.v("JSON", _Video.toJson());
 			multipartContent.addPart("JSON-RPC", new StringBody(_Video.toJson(), Charset.forName("UTF-8")));
 			multipartContent.addPart("file", new FileBody(new File(_Video.getFilepath())));
 			_TotalSize = multipartContent.getContentLength();
 			httpPost.setEntity(multipartContent);
 			HttpResponse response = httpClient.execute(httpPost, httpContext);
-			String serverResponse = EntityUtils.toString(response.getEntity());
+			HttpEntity entity = response.getEntity();
+			String serverResponse = null;
+			if (entity != null) {
+				InputStream instream = entity.getContent();
+				try {
+					String line = "";
+					StringBuilder total = new StringBuilder();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
+					while ((line = reader.readLine()) != null) {
+						total.append(line);
+					}
+					serverResponse = total.toString();
+					Log.v("Response", serverResponse);
+				} catch (IOException ex) {
+					throw ex;
+				} catch (RuntimeException ex) {
+					httpPost.abort();
+					throw ex;
+				} finally {
+					instream.close();
+				}
+				httpClient.getConnectionManager().shutdown();
+			}
 			return serverResponse;
-
 		}
 
 		catch (Exception e) {
@@ -82,8 +105,14 @@ public class UploadTask extends AsyncTask<Integer, Integer, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
-		_NotificationHelper.completed();
+		if (result == null) {
+		} else {
+			if (result.startsWith("{\"result\":")) {
+				_NotificationHelper.completed();
+			} else {
+				_NotificationHelper.error();
+			}
+		}
 		_Context.stopService(new Intent(_Context, UploadService.class));
 	}
-
 }

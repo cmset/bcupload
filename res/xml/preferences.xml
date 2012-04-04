@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_library" >
+        <EditTextPreference
+            android:name="library_token"
+            android:defaultValue="@string/undefined"
+            android:key="@string/pref_library_token_key"
+            android:summary="@string/pref_library_token_help"
+            android:title="@string/pref_library_token" />
+        <EditTextPreference
+            android:name="tags"
+            android:defaultValue="@string/undefined"
+            android:key="@string/pref_tags_key"
+            android:summary="@string/pref_tags_help"
+            android:title="@string/pref_tags" />
+        <EditTextPreference
+            android:name="credit"
+            android:defaultValue="@string/undefined"
+            android:key="@string/pref_credit_key"
+            android:summary="@string/pref_credit_help"
+            android:title="@string/pref_credit" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
