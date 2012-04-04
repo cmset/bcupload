@@ -3,6 +3,7 @@
 
     <string name="app_name">Brightcove Uploader</string>
     <string name="lbl_title">Titre</string>
+    <string name="lbl_icon">Icone</string>
     <string name="lbl_description">Description</string>
     <string name="lbl_author">Crédit</string>
     <string name="lbl_tags">Tags</string>
