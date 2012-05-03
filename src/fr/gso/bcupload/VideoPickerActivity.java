@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,6 +62,9 @@ public class VideoPickerActivity extends Activity implements OnItemClickListener
 			} while (cursor.moveToNext() && videoCounter <= numberOfVideosToKeep);
 		}
 		listView.setAdapter(new VideoGalleryAdapter(this, videoRows));
+		listView.setCacheColorHint(Color.TRANSPARENT);
+		listView.setFastScrollEnabled(true);
+		listView.setScrollingCacheEnabled(false);
 		listView.setOnItemClickListener(this);
 	}
 

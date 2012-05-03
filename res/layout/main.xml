@@ -8,8 +8,11 @@
     <Button
         android:id="@+id/btn_BrowseVideos"
         style="@style/Button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
         android:text="@string/lbl_browse" />
 
 </LinearLayout>

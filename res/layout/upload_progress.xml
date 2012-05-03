@@ -9,8 +9,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/lbl_icon" />
+        android:contentDescription="@string/lbl_icon"
+        android:scaleType="fitCenter" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
